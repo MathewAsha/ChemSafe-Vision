@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChemSafe Vision - Detection Result</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 0;
+            margin: 0;
+            flex-direction: column;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h2 {
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: rgba(255, 255, 255, 0.2);
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 10px;
+            color: #fff;
+        }
+
+        img {
+            max-width: 100%;
+            border-radius: 15px;
+            margin-top: 20px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
+            border-radius: 50px;
+            color: #fff;
+            font-weight: bold;
+            transition: background 0.3s ease-in-out;
+        }
+
+        a:hover {
+            background: linear-gradient(135deg, #0072ff 0%, #00c6ff 100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Detected Hazard Signs</h2>
+        <ul>
+            {% for box in bboxes %}
+                <li>{{ box['name'] }} - Confidence: {{ box['confidence'] | round(2) }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Result Image</h2>
+        <img src="data:image/jpeg;base64,{{ image_data }}" alt="Detected Image">
+        <br><br>
+        <a href="/">Back</a>
+    </div>
+</body>
+</html>
